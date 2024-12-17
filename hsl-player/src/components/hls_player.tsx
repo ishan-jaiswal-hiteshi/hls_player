@@ -20,6 +20,7 @@ const HlsPlayer: React.FC<HlsPlayerProps> = () => {
   const { state } = useLocation();
   const hlsPlayerProps = state as HlsPlayerProps;
   const navigate = useNavigate();
+  const [isAudio, setIsAudio] = useState(false);
 
   const {
     sourceUrl = "",
@@ -35,11 +36,11 @@ const HlsPlayer: React.FC<HlsPlayerProps> = () => {
   } = hlsPlayerProps || {};
 
   //Check for props data
-  if (!hlsPlayerProps) {
+  if (!hlsPlayerProps && isAudio) {
     return (
       <div className="flex justify-center items-center h-screen gap-2">
         <p className="text-red-500">
-          No player data provided. Please return to the form.
+          No or invalid player data provided. Please return to the form.
         </p>
         <button onClick={() => navigate("/")}>Go to Form</button>
       </div>
@@ -81,13 +82,42 @@ const HlsPlayer: React.FC<HlsPlayerProps> = () => {
           setDuration(duration);
         });
 
+        hls.on(Hls.Events.MANIFEST_PARSED, (_, data) => {
+          // Check the types of media available
+          const isAudio = data.levels.every(
+            (level) => !level.videoCodec || level.audioCodec === null
+          );
+          console.log("Is supported media", isAudio);
+          setIsAudio(isAudio);
+        });
+
+        hls.on(Hls.Events.LEVEL_LOADED, (_, data) => {
+          console.log("Level Loaded:", data);
+        });
+
         hls.on(Hls.Events.LEVEL_LOADED, (_, data) => {
           const duration = data.details.totalduration || 0;
           setDuration(duration);
         });
 
         hls.on(Hls.Events.ERROR, (event, data) => {
-          console.error("HLS.js error:", data);
+          if (data.fatal) {
+            switch (data.type) {
+              case Hls.ErrorTypes.NETWORK_ERROR:
+                console.error(
+                  "Fatal network error. Check the source URL or network."
+                );
+                break;
+              case Hls.ErrorTypes.MEDIA_ERROR:
+                console.error("Fatal media error. Attempting recovery.");
+                hls.recoverMediaError();
+                break;
+              default:
+                hls.destroy();
+                console.error("Unrecoverable error occurred.");
+                break;
+            }
+          }
         });
       }
 
@@ -103,6 +133,11 @@ const HlsPlayer: React.FC<HlsPlayerProps> = () => {
       videoElement.addEventListener("timeupdate", onTimeUpdate);
 
       return () => {
+        //Clear blob url
+        if (sourceUrl.startsWith("blob:")) {
+          URL.revokeObjectURL(sourceUrl);
+        }
+        //Clear player
         if (player) {
           player.dispose();
         }
@@ -166,7 +201,7 @@ const HlsPlayer: React.FC<HlsPlayerProps> = () => {
             <div className="rounded-lg overflow-hidden">
               <video
                 ref={videoRef}
-                className="video-js w-full h-auto"
+                className="video-js w-0 h-0"
                 poster={poster}
               />
             </div>
