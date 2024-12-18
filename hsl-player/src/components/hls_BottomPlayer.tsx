@@ -119,7 +119,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
 
           <button
             onClick={togglePlayPause}
-            className="bg-white text-white w-10 h-10 rounded-full shadow flex items-center justify-center hover:bg-gray-600"
+            className="bg-white text-white w-10 h-10 rounded-full shadow flex items-center justify-center hover:bg-gray-200"
             aria-label={isPlaying ? "Pause" : "Play"}
           >
             {isPlaying ? (

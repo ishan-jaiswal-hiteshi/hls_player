@@ -4,7 +4,7 @@ import HlsPlayer from "./components/hls_Player.tsx";
 //import React from "react";
 import FormPage from "./components/hls_Form.tsx";
 
-//Defining reoutes in App
+//Defining reoutes for App
 function App() {
   return (
     <Router>

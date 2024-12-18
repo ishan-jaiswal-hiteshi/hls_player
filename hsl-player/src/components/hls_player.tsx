@@ -136,8 +136,8 @@ const HlsPlayer: React.FC<HlsPlayerProps> = () => {
 
       // Listen for the end update
       videoElement.addEventListener("ended", () => {
-        setIsPlaying(false); // Stop the play state when media ends
-        setCurrentTime(0); // Reset the current time
+        setIsPlaying(false);
+        setCurrentTime(0);
       });
 
       //Listen for time updates
@@ -153,6 +153,7 @@ const HlsPlayer: React.FC<HlsPlayerProps> = () => {
         if (player) {
           player.dispose();
         }
+
         //Close listner
         videoElement.removeEventListener("timeupdate", onTimeUpdate);
         videoElement.removeEventListener("ended", () => {
