@@ -35,7 +35,7 @@ const HlsPlayer: React.FC<HlsPlayerProps> = () => {
   } = hlsPlayerProps || {};
 
   //If no props
-  if (!hlsPlayerProps && isAudio) {
+  if (!hlsPlayerProps && !isAudio) {
     return (
       <div className="flex justify-center items-center h-screen gap-2">
         <p className="text-red-500">
