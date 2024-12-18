@@ -6,13 +6,14 @@ const FormPage: React.FC = () => {
   const [fileType, setFileType] = useState("link");
   const navigate = useNavigate();
   const [formData, setFormData] = useState<HlsPlayerProps>({
-    sourceUrl: "",
-    name: "",
-    artist: "",
-    albumName: "",
-    description: "",
-    poster: "",
-    autoplay: false,
+    sourceUrl:
+      "https://d2ccagweq17i1k.cloudfront.net/Output/1733996982061_Tum%20Hi%20Ho%20-%20Aashiqui%202%20128%20Kbps/1733996982061_Tum%20Hi%20Ho%20-%20Aashiqui%202%20128%20Kbps.m3u8?Expires=1734007220&Key-Pair-Id=AKIA3M7ACXH2FQDUUG47&Signature=iBuHSU~oEq-G0V5dag-0FSD0cyHlYIf2EaNwroYxyAGC7vnEDmTJ3xndkEqkNnh~FGon4g3kP56yOFF-jeewpYepfPZAqL6B3emFk8W1OVDZltCED7ZuTKj5Bq5X03xdNWB-pJNdcSk9-vtdPF58om8ElFWScxb22NtgQHJiQYUFMtCk-6cljAyWpwinHejk6fEpM0zztzN-Lv4sSX3c23z0Cxq5CesQJAlCBg3D3FmmPMJ4Oe6M7HR3GZResTcrPUuDd4Cev~5ATLqEE3b~tuCsb9V7KzvMn1ps~qfe~vSzTufrogb~~Znoy9N7e1~PQ~KkU~ewMw~lOsAYw1QKjw__",
+    name: "Song Name",
+    artist: "Artist Name",
+    albumName: "Album Name",
+    description: "Description",
+    poster: "https://tailwindcss.com/img/card-top.jpg",
+    autoplay: true,
     loop: false,
     muted: false,
     preload: "auto",
@@ -26,7 +27,7 @@ const FormPage: React.FC = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  //upload file handle
+  //Upload file handle
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -46,13 +47,14 @@ const FormPage: React.FC = () => {
     }
   };
 
-  //input type URL || File upload
+  //Input type URL || File upload
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFileType(e.target.value);
     if (e.target.value === "link") {
       setFormData((prev) => ({ ...prev, sourceUrl: "" }));
     }
   };
+
   //Form Submit
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -129,6 +131,7 @@ const FormPage: React.FC = () => {
           />
         </div>
 
+        {/* Chose file or link */}
         <div className="flex justify-center items-center space-x-4">
           <div>
             <input

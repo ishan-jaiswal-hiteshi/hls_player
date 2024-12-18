@@ -1,3 +1,4 @@
+//HLS props
 export default interface HlsPlayerProps {
   sourceUrl?: string;
   autoplay?: boolean;
