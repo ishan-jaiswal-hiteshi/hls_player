@@ -2,10 +2,11 @@
 import React from "react";
 import BottomBarProps from "../props/bottombar_Props.tsx";
 import { IoStatsChart } from "react-icons/io5";
-import { CiPlay1, CiPause1, CiStop1 } from "react-icons/ci";
+import { CiPlay1, CiPause1 } from "react-icons/ci";
 import { TbPlayerTrackPrev, TbPlayerTrackNext } from "react-icons/tb";
 import { RxLoop, RxCrossCircled } from "react-icons/rx";
 import formatTime from "../utils/time_Utils.tsx";
+import { RxStop } from "react-icons/rx";
 
 const BottomBar: React.FC<BottomBarProps> = ({
   name,
@@ -29,14 +30,14 @@ const BottomBar: React.FC<BottomBarProps> = ({
       <div className="relative w-full h-1">
         {/* Buffered Progress Bar */}
         <div
-          className="absolute top-0 left-0 h-2 bg-gray-400 rounded-full"
+          className="absolute top-0 left-0 h-2 bg-yellow-100 rounded-full"
           style={{
             width: `${(buffered / duration) * 100}%`,
           }}
         />
         {/*Played Bar*/}
         <div
-          className="absolute h-2 bg-orange-500 rounded-full"
+          className="absolute h-2 bg-yellow-500 rounded-full"
           style={{ width: `${(currentTime / duration) * 100}%` }}
         />
         {/* Input Range for Seeking */}
@@ -67,8 +68,8 @@ const BottomBar: React.FC<BottomBarProps> = ({
         height: 10px;
         width: 10px;
         border-radius: 50%;
-        background: orange;
-        border: 2px solid darkorange;
+        background: yellow;
+        border: 2px solid orange;
         margin-top: 3px;
       }
     `}
@@ -79,7 +80,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
       <div className="p-3 flex items-center justify-between">
         {/* Song Name (Left Panel)*/}
         <div className="flex items-center gap-2 sm:gap-4 truncate">
-          <IoStatsChart size={16} className="text-white sm:text-orange-500" />
+          <IoStatsChart size={16} className="text-white sm:text-white-500" />
           <p className="text-xs sm:text-sm lg:text-base font-medium truncate">
             {`${name} - ${artist}`}
           </p>
@@ -98,38 +99,42 @@ const BottomBar: React.FC<BottomBarProps> = ({
               if (playerRef.current) playerRef.current.currentTime(newTime);
               setCurrentTime(newTime);
             }}
-            className="bg-yellow-500 text-white px-4 py-2 rounded-lg shadow hover:bg-yellow-600"
+            className="bg-black-500 px-4 py-2 rounded-lg shadow hover:bg-grey-600"
             aria-label="Rewind 10 seconds"
           >
-            <TbPlayerTrackPrev />
-          </button>
-
-          <button
-            onClick={togglePlayPause}
-            className="bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600"
-            aria-label={isPlaying ? "Pause" : "Play"}
-          >
-            {isPlaying ? <CiPause1 /> : <CiPlay1 />}
-          </button>
-
-          <button
-            onClick={stopPlayback}
-            className="bg-red-500 text-white px-4 py-2 rounded-lg shadow hover:bg-red-600"
-            aria-label="Stop Playback"
-          >
-            <CiStop1 />
+            <TbPlayerTrackPrev color="white" size={20} />
           </button>
 
           <button
             onClick={toggleLoop}
-            className={`px-4 py-2 rounded-lg shadow ${
-              isLooping
-                ? "bg-green-500 text-white hover:bg-green-600"
-                : "bg-gray-300 text-gray-700 hover:bg-gray-400"
-            }`}
+            className={`px-4 py-2 rounded-lg bg-black shadow `}
             aria-label="Toggle Loop"
           >
-            <RxLoop />
+            {isLooping ? (
+              <RxLoop color="orange" size={20} />
+            ) : (
+              <RxLoop color="white" size={20} />
+            )}
+          </button>
+
+          <button
+            onClick={togglePlayPause}
+            className="bg-white text-white w-10 h-10 rounded-full shadow flex items-center justify-center hover:bg-gray-600"
+            aria-label={isPlaying ? "Pause" : "Play"}
+          >
+            {isPlaying ? (
+              <CiPause1 color="black" size={20} />
+            ) : (
+              <CiPlay1 color="black" size={20} />
+            )}
+          </button>
+
+          <button
+            onClick={stopPlayback}
+            className="bg-black text-white px-4 py-2 rounded-lg shadow hover:bg-grey-600"
+            aria-label="Stop Playback"
+          >
+            <RxStop color="white" size={20} />
           </button>
 
           <button
@@ -138,10 +143,10 @@ const BottomBar: React.FC<BottomBarProps> = ({
               if (playerRef.current) playerRef.current.currentTime(newTime);
               setCurrentTime(newTime);
             }}
-            className="bg-yellow-500 text-white px-4 py-2 rounded-lg shadow hover:bg-yellow-600"
+            className="bg-black  px-4 py-2 rounded-lg shadow hover:bg-grey-600"
             aria-label="Fast Forward 10 seconds"
           >
-            <TbPlayerTrackNext />
+            <TbPlayerTrackNext color="white" size={20} />
           </button>
 
           <button
@@ -149,7 +154,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
             className="text-white"
             aria-label="Close Player"
           >
-            <RxCrossCircled size={30} />
+            <RxCrossCircled size={25} />
           </button>
         </div>
       </div>

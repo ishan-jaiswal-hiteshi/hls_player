@@ -204,7 +204,7 @@ const HlsPlayer: React.FC<HlsPlayerProps> = () => {
   };
 
   return (
-    <div className="flex flex-col items-center px-4 md:flex-row md:justify-center h-screen max-w-full overflow-hidden">
+    <div className="font-poppins flex flex-col items-center px-4 md:flex-row md:justify-center  max-w-full overflow-hidden">
       {/* Album Detail panel */}
       <AlbumDetails
         poster={poster}
