@@ -12,13 +12,13 @@ const AlbumDetails: React.FC<AlbumDetailsProps> = ({
   videoRef,
 }) => {
   return (
-    <div className="shadow-lg rounded-lg overflow-hidden max-w-3xl w-full flex flex-col p-4 md:p-10 gap-6 bg-white">
+    <div className="shadow-xl shadow-orange-200 rounded-lg overflow-hidden max-w-3xl w-full flex flex-col p-4 md:p-10 gap-6 bg-white">
       {/* Album Poster */}
-      <div className="flex justify-center w-full">
+      <div className="flex justify-center w-full ">
         <img
           src={poster}
           alt={`Album poster for ${name}`}
-          className="rounded-full w-40 h-40 md:w-96 md:h-96 object-cover shadow-xl "
+          className="rounded-full w-40 h-40 md:w-96 md:h-96 object-cover shadow-lg drop-shadow-2xl"
         />
       </div>
 

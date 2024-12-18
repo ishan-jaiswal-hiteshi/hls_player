@@ -134,6 +134,12 @@ const HlsPlayer: React.FC<HlsPlayerProps> = () => {
         }
       };
 
+      // Listen for the end update
+      videoElement.addEventListener("ended", () => {
+        setIsPlaying(false); // Stop the play state when media ends
+        setCurrentTime(0); // Reset the current time
+      });
+
       //Listen for time updates
       videoElement.addEventListener("timeupdate", onTimeUpdate);
 
@@ -149,6 +155,10 @@ const HlsPlayer: React.FC<HlsPlayerProps> = () => {
         }
         //Close listner
         videoElement.removeEventListener("timeupdate", onTimeUpdate);
+        videoElement.removeEventListener("ended", () => {
+          setIsPlaying(false);
+          setCurrentTime(0);
+        });
       };
     }
   }, [sourceUrl, autoplay, loop, muted, poster, preload]);
@@ -194,7 +204,7 @@ const HlsPlayer: React.FC<HlsPlayerProps> = () => {
   };
 
   return (
-    <div className="flex flex-col items-center px-4 md:flex-row md:justify-center  max-w-full overflow-hidden">
+    <div className="flex flex-col items-center px-4 md:flex-row md:justify-center h-screen max-w-full overflow-hidden">
       {/* Album Detail panel */}
       <AlbumDetails
         poster={poster}
@@ -205,6 +215,7 @@ const HlsPlayer: React.FC<HlsPlayerProps> = () => {
         videoRef={videoRef}
       />
 
+      {/*Bottom Player bar */}
       <BottomBar
         name={name}
         artist={artist}
