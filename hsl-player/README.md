@@ -1,50 +1,33 @@
-# React + TypeScript + Vite
+# HLS Audio Player
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React-based HLS Audio Player built with Vite, TypeScript, HLS.js, Video.js, and Tailwind CSS.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- HLS playback with Video.js and HLS.js.
+- Dynamic form for media input (URL or file).
+- Responsive design with Tailwind CSS.
+- Supports custom media metadata.
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **React + Vite**
+- **TypeScript**
+- **Video.js** and **HLS.js**
+- **Tailwind CSS**
 
-- Configure the top-level `parserOptions` property like this:
+## Setup
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+1. Clone the repository.
+2. Install dependencies:
+3. Terminal  
+   -- npm install
+   -- npx vite --host
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Usage
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+1. Navigate to the form page (/).
+2. Enter media details or upload an HLS (.m3u8) file.
+3. Submit the form to play the media.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+**Note - File Upload is to be implemented later.**
