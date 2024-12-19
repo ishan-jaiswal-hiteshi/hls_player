@@ -69,6 +69,8 @@ const FormPage: React.FC = () => {
       alert("Please upload a valid M3U8 file.");
       return;
     }
+
+    //Flag for Form Submitted
     localStorage.setItem("formSubmitted", "true");
 
     navigate("/audio-player", { state: formData });

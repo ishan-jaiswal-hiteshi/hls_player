@@ -41,7 +41,14 @@ const HlsPlayer: React.FC<HlsPlayerProps> = () => {
         <p className="text-red-500">
           No or invalid player data provided. Please return to the form.
         </p>
-        <button onClick={() => navigate("/")}>Go to Form</button>
+        <button
+          onClick={() => {
+            navigate("/", { replace: true, state: null });
+            localStorage.setItem("formSubmitted", "false");
+          }}
+        >
+          Go to Form
+        </button>
       </div>
     );
   }
