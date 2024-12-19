@@ -72,6 +72,9 @@ const PlaylistPage: React.FC = () => {
   return (
     <div className="font-poppins flex flex-col items-center px-4 md:flex-row md:justify-center  max-w-full overflow-hidden">
       <div className="shadow-xl shadow-yellow-200 rounded-lg overflow-hidden max-w-3xl w-full flex flex-col p-4 md:p-10 gap-6 bg-white ">
+        <h2 className="text-2xl font-bold text-center mb-4 sm:text-xl">
+          Playlist
+        </h2>
         <ul className="divide-y divide-gray-200">
           {mediaList.map((song, index) => (
             <li key={index} className="py-4">
