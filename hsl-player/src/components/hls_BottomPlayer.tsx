@@ -1,6 +1,6 @@
 // BottomBar.tsx
 import React from "react";
-import BottomBarProps from "../props/bottombar_Props.tsx";
+import BottomBarProps from "../props/bottomBar_Props.tsx";
 import { IoStatsChart } from "react-icons/io5";
 import { CiPlay1, CiPause1 } from "react-icons/ci";
 import { TbPlayerTrackPrev, TbPlayerTrackNext } from "react-icons/tb";
@@ -150,7 +150,10 @@ const BottomBar: React.FC<BottomBarProps> = ({
           </button>
 
           <button
-            onClick={() => navigate("/", { replace: true, state: null })}
+            onClick={() => {
+              navigate("/", { replace: true, state: null });
+              localStorage.setItem("formSubmitted", "false");
+            }}
             className="text-white"
             aria-label="Close Player"
           >

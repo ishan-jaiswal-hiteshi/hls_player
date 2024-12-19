@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import HlsPlayerProps from "../props/player_Props";
 
@@ -18,6 +18,13 @@ const FormPage: React.FC = () => {
     muted: false,
     preload: "auto",
   });
+
+  // Redirect if form is already submitted
+  useEffect(() => {
+    if (localStorage.getItem("formSubmitted") === "true") {
+      navigate("/audio-player");
+    }
+  }, [navigate]);
 
   //Form input handle
   const handleChange = (
@@ -62,6 +69,8 @@ const FormPage: React.FC = () => {
       alert("Please upload a valid M3U8 file.");
       return;
     }
+    localStorage.setItem("formSubmitted", "true");
+
     navigate("/audio-player", { state: formData });
   };
 
