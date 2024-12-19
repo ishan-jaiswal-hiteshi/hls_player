@@ -3,7 +3,7 @@ import React from "react";
 import AlbumDetailsProps from "../props/albumDetails_Props";
 import { IoStatsChart } from "react-icons/io5";
 import { RiPlayListAddLine } from "react-icons/ri";
-
+import { Link } from "react-router-dom";
 const AlbumDetails: React.FC<AlbumDetailsProps> = ({
   poster,
   name,
@@ -44,7 +44,11 @@ const AlbumDetails: React.FC<AlbumDetailsProps> = ({
               <h2 className="text-xl font-bold text-yellow-400">{name}</h2>
             </div>
             <div className="text-right">
-              <RiPlayListAddLine size={24} />
+              <Link to="/playlists">
+                <button>
+                  <RiPlayListAddLine size={24} />
+                </button>
+              </Link>
             </div>
           </div>
           <p className="text-gray-500 text-xs mb-2">
